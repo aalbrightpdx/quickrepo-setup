@@ -84,6 +84,21 @@ source ~/.bashrc
 
 ### 4. Test it
 
+## 📜 Quick Recap: Full Commands
+
+```bash
+# Clone the repo into ~/.bin
+git clone git@github.com:aalbrightpdx/quickrepo-setup.git ~/.bin/quickrepo-setup
+
+# Create shortcut launcher
+echo -e '#!/bin/bash\npython3 ~/.bin/quickrepo-setup/setup_repo.py' > ~/.bin/setup_repo
+chmod +x ~/.bin/setup_repo
+
+# Add ~/.bin to PATH if needed
+echo 'export PATH="$HOME/.bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+```
+
 ## Features
 
 🛠️ Check and set Git global username/email

@@ -93,13 +93,12 @@ def main():
         print(f"✅ Remote origin set: {ssh_url}\n")
     else:
         print("➤ Remote already exists:\n" + remotes + "\n")
-        if "https://" in remotes:
-            fix_remote = input("➤ Remote uses HTTPS. Switch to SSH? [y/n]: ").lower()
-            if fix_remote == 'y':
-                remote_input = input("➤ Enter SSH path (e.g., username/repo.git or full SSH URL): ").strip()
-                ssh_url = fix_remote_url(remote_input)
-                run_cmd(f"git remote set-url origin {ssh_url}")
-                print(f"✅ Remote URL updated to SSH: {ssh_url}\n")
+        change_remote = input("➤ Remote already exists. Do you want to change it? [y/n]: ").lower()
+        if change_remote == 'y':
+            remote_input = input("➤ Enter new SSH path (e.g., username/repo.git or full SSH URL): ").strip()
+            ssh_url = fix_remote_url(remote_input)
+            run_cmd(f"git remote set-url origin {ssh_url}")
+            print(f"✅ Remote URL updated to SSH: {ssh_url}\n")
 
     # Step 5: Stage files
     run_cmd("git add .")
@@ -125,8 +124,6 @@ def main():
             print("❌ Push failed.\n")
             print("💡 Tip: You may need to run one of the following manually:")
             print("    git pull --rebase origin main")
-            print("    OR")
-            print("    git push -u origin main --force")
             print("")
     else:
         print("⚠️ Push skipped. You can push later manually.\n")

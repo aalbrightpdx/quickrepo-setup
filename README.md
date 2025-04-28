@@ -141,6 +141,23 @@ If you don't yet have an SSH key, the script will help you create one.
 
 Make sure you manually upload your public SSH key to GitHub under Settings > SSH and GPG keys.
 
+## ✨ Recommended Next Step: Use GitHelper
+
+After you configure a repository with repo-setup,
+you can use githelper for regular day-to-day commits and pushes.
+
+GitHelper is a simple CLI tool that:
+
+    Shows which repo you are about to update
+
+    Lets you review git status
+
+    Guides you through adding, committing, and pushing safely
+
+    Helps prevent mistakes like committing to the wrong repo
+
+Install GitHelper just like QuickRepo-Setup for best results!
+
 ## License
 
 MIT License

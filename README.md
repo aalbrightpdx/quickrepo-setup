@@ -22,6 +22,68 @@ python3 setup_repo.py
 
 The script will guide you step-by-step!
 
+## How to Install
+
+### 1. Clone the repo into ~/.bin/quickrepo-setup
+
+```bash
+git clone git@github.com:aalbrightpdx/quickrepo-setup.git ~/.bin/quickrepo-setup
+```
+
+### 2. (Optional) Make a Shortcut Script
+
+If you want to run it easily like:
+
+```bash
+setup_repo
+```
+from anywhere,
+you can make a tiny wrapper script inside ~/.bin/.
+
+Create a new file:
+
+```bash
+nano ~/.bin/setup_repo
+```
+
+Paste this inside:
+
+```bash
+#!/bin/bash
+python3 ~/.bin/quickrepo-setup/setup_repo.py
+```
+
+Save and exit (CTRL+O, Enter, CTRL+X).
+
+Make it executable:
+
+```bash
+chmod +x ~/.bin/setup_repo
+```
+
+✅ Now setup_repo becomes a command!
+
+### 3. Add ~/.bin to your PATH (if it's not already)
+
+First, check if ~/.bin is in your path:
+
+```bash
+echo $PATH
+```
+
+If you don't see it, add it to your shell config.
+
+If you use bash:
+
+```bash
+echo 'export PATH="$HOME/.bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+✅ Now your terminal knows to look inside ~/.bin/ for commands!
+
+### 4. Test it
+
 ## Features
 
 🛠️ Check and set Git global username/email

@@ -82,8 +82,6 @@ source ~/.bashrc
 
 ✅ Now your terminal knows to look inside ~/.bin/ for commands!
 
-### 4. Test it
-
 ## 📜 Quick Recap: Full Commands
 
 ```bash
@@ -98,6 +96,16 @@ chmod +x ~/.bin/setup_repo
 echo 'export PATH="$HOME/.bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
 ```
+
+### 4. Test it
+
+Now anywhere you are, you can type:
+
+```bash
+setup_repo
+```
+
+and it will run your fancy repo setup wizard! ✨🔥
 
 ## Features
 

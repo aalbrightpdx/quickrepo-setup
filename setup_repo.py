@@ -46,6 +46,16 @@ def create_ssh_key():
     else:
         print("⚠️ Skipping SSH key creation. You will need one to push via SSH.")
 
+def fix_remote_url(remote_input):
+    """Auto-correct remote URL input."""
+    if remote_input.startswith("git@github.com:"):
+        return remote_input
+    elif "/" in remote_input and not remote_input.startswith("http"):
+        return f"git@github.com:{remote_input}"
+    else:
+        print("⚠️ Invalid remote format. Please enter 'username/repo.git' or full SSH URL like 'git@github.com:username/repo.git'.")
+        sys.exit(1)
+
 def main():
     # Step 1: Check Git global username/email
     username, email = check_git_global_user()
@@ -75,15 +85,17 @@ def main():
     # Step 4: Add remote origin or fix if needed
     remotes = run_cmd("git remote -v", capture_output=True)
     if not remotes:
-        remote_url = input("➤ Enter remote SSH URL (e.g., git@github.com:username/repo.git): ").strip()
-        run_cmd(f"git remote add origin {remote_url}")
-        print(f"✅ Remote origin set: {remote_url}\n")
+        remote_input = input("➤ Enter SSH path (e.g., username/repo.git or full SSH URL): ").strip()
+        ssh_url = fix_remote_url(remote_input)
+        run_cmd(f"git remote add origin {ssh_url}")
+        print(f"✅ Remote origin set: {ssh_url}\n")
     else:
         print("➤ Remote already exists:\n" + remotes + "\n")
         if "https://" in remotes:
             fix_remote = input("➤ Remote uses HTTPS. Switch to SSH? [y/n]: ").lower()
             if fix_remote == 'y':
-                ssh_url = input("➤ Enter the SSH version of the remote URL (e.g., git@github.com:username/repo.git): ").strip()
+                remote_input = input("➤ Enter SSH path (e.g., username/repo.git or full SSH URL): ").strip()
+                ssh_url = fix_remote_url(remote_input)
                 run_cmd(f"git remote set-url origin {ssh_url}")
                 print(f"✅ Remote URL updated to SSH: {ssh_url}\n")
 
@@ -109,7 +121,7 @@ def main():
     else:
         print("⚠️ Push skipped. You can push later manually.\n")
 
-    print("🎉 All done! Your forge is lit. 🔥")
+    print("🎉 All done! Your forge shines brightly! 🔥")
 
 if __name__ == "__main__":
     main()

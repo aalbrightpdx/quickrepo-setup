@@ -4,10 +4,12 @@ import os
 import subprocess
 import sys
 
-def run_cmd(cmd, capture_output=False):
+def run_cmd(cmd, capture_output=False, check_success=False):
     """Run a system command."""
     result = subprocess.run(cmd, shell=True, text=True,
                              capture_output=capture_output)
+    if check_success:
+        return result.returncode == 0
     if capture_output:
         return result.stdout.strip()
     return None
@@ -116,12 +118,20 @@ def main():
     # Step 8: Push
     push_now = input("➤ Push to GitHub now? [y/n]: ").lower()
     if push_now == 'y':
-        run_cmd("git push -u origin main")
-        print("✅ Pushed to GitHub!\n")
+        success = run_cmd("git push -u origin main", check_success=True)
+        if success:
+            print("✅ Pushed to GitHub!\n")
+        else:
+            print("❌ Push failed.\n")
+            print("💡 Tip: You may need to run one of the following manually:")
+            print("    git pull --rebase origin main")
+            print("    OR")
+            print("    git push -u origin main --force")
+            print("")
     else:
         print("⚠️ Push skipped. You can push later manually.\n")
 
-    print("🎉 All done! Your forge shines brightly! 🔥")
+    print("🎉 All done! Your forge glows brightly! 🔥")
 
 if __name__ == "__main__":
     main()

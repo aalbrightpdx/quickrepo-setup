@@ -72,7 +72,7 @@ def main():
     else:
         print("➤ Git repo already initialized.\n")
 
-    # Step 4: Add remote origin
+    # Step 4: Add remote origin or fix if needed
     remotes = run_cmd("git remote -v", capture_output=True)
     if not remotes:
         remote_url = input("➤ Enter remote SSH URL (e.g., git@github.com:username/repo.git): ").strip()
@@ -80,6 +80,12 @@ def main():
         print(f"✅ Remote origin set: {remote_url}\n")
     else:
         print("➤ Remote already exists:\n" + remotes + "\n")
+        if "https://" in remotes:
+            fix_remote = input("➤ Remote uses HTTPS. Switch to SSH? [y/n]: ").lower()
+            if fix_remote == 'y':
+                ssh_url = input("➤ Enter the SSH version of the remote URL (e.g., git@github.com:username/repo.git): ").strip()
+                run_cmd(f"git remote set-url origin {ssh_url}")
+                print(f"✅ Remote URL updated to SSH: {ssh_url}\n")
 
     # Step 5: Stage files
     run_cmd("git add .")
@@ -103,7 +109,7 @@ def main():
     else:
         print("⚠️ Push skipped. You can push later manually.\n")
 
-    print("🎉 All done!")
+    print("🎉 All done! Your forge is lit. 🔥")
 
 if __name__ == "__main__":
     main()

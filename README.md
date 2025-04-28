@@ -17,7 +17,7 @@ This script helps you:
 Navigate into your project directory and run:
 
 ```bash
-python3 setup_repo.py
+python3 repo-setup.py
 ```
 
 The script will guide you step-by-step!
@@ -35,7 +35,7 @@ git clone git@github.com:aalbrightpdx/quickrepo-setup.git ~/.bin/quickrepo-setup
 If you want to run it easily like:
 
 ```bash
-setup_repo
+repo-setup
 ```
 from anywhere,
 you can make a tiny wrapper script inside ~/.bin/.
@@ -43,14 +43,14 @@ you can make a tiny wrapper script inside ~/.bin/.
 Create a new file:
 
 ```bash
-nano ~/.bin/setup_repo
+nano ~/.bin/repo-setup
 ```
 
 Paste this inside:
 
 ```bash
 #!/bin/bash
-python3 ~/.bin/quickrepo-setup/setup_repo.py
+python3 ~/.bin/quickrepo-setup/repo-setup.py
 ```
 
 Save and exit (CTRL+O, Enter, CTRL+X).
@@ -58,10 +58,10 @@ Save and exit (CTRL+O, Enter, CTRL+X).
 Make it executable:
 
 ```bash
-chmod +x ~/.bin/setup_repo
+chmod +x ~/.bin/repo-setup
 ```
 
-✅ Now setup_repo becomes a command!
+✅ Now repo-setup becomes a command!
 
 ### 3. Add ~/.bin to your PATH (if it's not already)
 
@@ -89,8 +89,8 @@ source ~/.bashrc
 git clone git@github.com:aalbrightpdx/quickrepo-setup.git ~/.bin/quickrepo-setup
 
 # Create shortcut launcher
-echo -e '#!/bin/bash\npython3 ~/.bin/quickrepo-setup/setup_repo.py' > ~/.bin/setup_repo
-chmod +x ~/.bin/setup_repo
+echo -e '#!/bin/bash\npython3 ~/.bin/quickrepo-setup/repo-setup.py' > ~/.bin/repo-setup
+chmod +x ~/.bin/repo-setup
 
 # Add ~/.bin to PATH if needed
 echo 'export PATH="$HOME/.bin:$PATH"' >> ~/.bashrc
@@ -102,7 +102,7 @@ source ~/.bashrc
 Now anywhere you are, you can type:
 
 ```bash
-setup_repo
+repo-setup
 ```
 
 and it will run your fancy repo setup wizard! ✨🔥
